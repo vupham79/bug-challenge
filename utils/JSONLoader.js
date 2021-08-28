@@ -1,4 +1,5 @@
 const TextLoader = require('./TextLoader')
+const Replacer = require('./Replacer').revertSpecialCharacters
 
 /**
  * 
@@ -6,8 +7,12 @@ const TextLoader = require('./TextLoader')
  * @returns {Object} json object
  */
 const ParseJSON = (path) => {
-    const text = TextLoader(path)
-    return JSON.parse(text)
+    let text = TextLoader(path)
+
+    const parsedText = JSON.parse(text)
+    parsedText.processed = Replacer(parsedText.processed)
+
+    return parsedText
 }
 
 module.exports = ParseJSON

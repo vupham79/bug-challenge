@@ -19,14 +19,38 @@ const tags = [
  * @param {Object} source_data {} object that contains the source data
  * @returns {String} processed string
  */
-const replace = (text, source_data = {}) => {
+const replaceTag = (text, source_data = {}) => {
     let new_text = text + ''
 
     tags.forEach(ftag => {
         new_text = new_text.replace(ftag.tag, ftag.resolver(source_data))
     })
 
+    new_text = replaceSpecialCharacters(new_text)
+
     return new_text
 }
 
-module.exports = replace
+/**
+ * 
+ * @param {String} text the string to be replaced
+ * @returns {String} replaced string
+ */
+const replaceSpecialCharacters = (text) => {
+    return text.replaceAll('"', "&quot;")
+}
+
+/**
+ * 
+ * @param {String} text the string to be reverted
+ * @returns {String} reverted string
+ */
+const revertSpecialCharacters = (text) => {
+    return text.replaceAll('&quot;', "\"")
+}
+
+module.exports = {
+    replaceTag,
+    replaceSpecialCharacters,
+    revertSpecialCharacters
+}

@@ -1,4 +1,4 @@
-const Replacer = require('./utils/Replacer')
+const Replacer = require('./utils/Replacer').replaceTag
 const SaveJSON = require('./utils/SaveJSON')
 const TextLoader = require('./utils/TextLoader')
 const JSONLoader = require('./utils/JSONLoader')
